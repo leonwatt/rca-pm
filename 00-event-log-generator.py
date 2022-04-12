@@ -1,4 +1,3 @@
-from sqlalchemy import TIMESTAMP
 import utils
 import random
 import os
@@ -9,6 +8,7 @@ AVERAGE_CASE_LENGTH = 4
 MAX_CASE_LENGTH_DEVIATION = 2
 NUMBER_OF_CASES = 100
 TIMESTAMP_INCREASE_PROBABILITY = .5
+DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .1 # Approx. 34% chance to exceed deadline for case of length 4
 
 event_log = []
 timestamp = 0
@@ -24,6 +24,7 @@ for case_index in range(0, NUMBER_OF_CASES):
     # In this list each event has a random activity and resource.
     cases.append({
         "id": case_id,
+        "deadline_exceeded": False, # Initially always false, may turn true with every event (and stay true then)
         "events": [{
             "activity": random.choice(ACTIVITY_NAMES),
             "resource": random.choice(RESOURCE_NAMES)
@@ -36,14 +37,22 @@ while(True):
     # Terminate when all events have been added
     if len(non_empty_cases) == 0: break
 
+
     # Choose a random case and append first event of it
     case = random.choice(non_empty_cases)
     event = case["events"][0]
+
+    case["deadline_exceeded"] = case["deadline_exceeded"] or random.random() < DEADLINE_EXCEED_PROBABILITY_PER_EVENT
+    event["deadline_exceeded"] = case["deadline_exceeded"]
+
     event["case"] = case["id"]
     event["timestamp"] = timestamp
     event_log.append(event)
+    
     case["events"] = case["events"][1:]
 
     if (random.random() < TIMESTAMP_INCREASE_PROBABILITY): timestamp += 1
 
-utils.write_csv(os.path.join("event-logs"," log.csv"), event_log)
+path = os.path.join("event-logs", "log.csv")
+utils.write_csv(path, event_log)
+print(f"Written event log with {len(event_log)} events to {path}")

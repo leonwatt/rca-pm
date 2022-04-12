@@ -1,1 +1,2 @@
 event-logs/*.csv
+__pycache__/*
