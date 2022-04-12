@@ -1,11 +1,14 @@
+from sqlalchemy import TIMESTAMP
 import utils
 import random
+import os
 
 ACTIVITY_NAMES = ["A", "B", "C", "D"]
 RESOURCE_NAMES = ["r1", "r2", "r3"]
 AVERAGE_CASE_LENGTH = 4
 MAX_CASE_LENGTH_DEVIATION = 2
 NUMBER_OF_CASES = 100
+TIMESTAMP_INCREASE_PROBABILITY = .5
 
 event_log = []
 timestamp = 0
@@ -41,6 +44,6 @@ while(True):
     event_log.append(event)
     case["events"] = case["events"][1:]
 
-    if (random.random() < .5): timestamp += 1
+    if (random.random() < TIMESTAMP_INCREASE_PROBABILITY): timestamp += 1
 
-utils.write_csv("event-logs/log.csv", event_log)
+utils.write_csv(os.path.join("event-logs"," log.csv"), event_log)
