@@ -4,7 +4,7 @@ import statistics
 import datetime
 
 
-def prepare_input(path_to_event_log = os.path.join("event-logs", "log.csv")):
+def prepare_input(system_states, path_to_event_log = os.path.join("event-logs", "log.csv"), print_stats = False):
     event_log = utils.read_csv(path_to_event_log)
 
     def parse_timestamp(event):
@@ -24,6 +24,10 @@ def prepare_input(path_to_event_log = os.path.join("event-logs", "log.csv")):
         print(f"Median case length (days): {statistics.median([c[-1]['rel_timestamp'] - c[0]['rel_timestamp'] for c in cases])}")
         print()
 
-    print_event_log_stats()
+    if print_stats: print_event_log_stats()
 
-    print(event_log[10])
+    return [{
+        "case": e["case"],
+        "state": [fn(e) for fn in system_states],
+        "timestamp": e["rel_timestamp"]
+    } for e in event_log]
