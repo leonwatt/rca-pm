@@ -4,8 +4,8 @@ import statistics
 import datetime
 
 
-def prepare_input(path = os.path.join("event-logs", "log.csv")):
-    event_log = utils.read_csv(path)
+def prepare_input(path_to_event_log = os.path.join("event-logs", "log.csv")):
+    event_log = utils.read_csv(path_to_event_log)
 
     def parse_timestamp(event):
         return datetime.datetime.strptime(event["timestamp"], utils.DATE_FORMAT)
