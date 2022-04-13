@@ -28,6 +28,6 @@ def prepare_input(system_states, path_to_event_log = os.path.join("event-logs", 
 
     return [{
         "case": e["case"],
-        "state": [fn(e) for fn in system_states],
+        "state": {key: fn(e) for (key, fn) in system_states.items()},
         "timestamp": e["rel_timestamp"]
     } for e in event_log]
