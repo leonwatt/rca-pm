@@ -31,3 +31,6 @@ def group_by(arr_of_dicts, grouping_attr):
         res[grouping_value] += [el]
 
     return res
+
+def group_by_as_list(arr_of_dicts, grouping_attr):
+    return list(group_by(arr_of_dicts, grouping_attr).values())

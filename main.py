@@ -1,5 +1,6 @@
 from input_data_preparation import prepare_input
 from hypotheses_generation import generate_hypotheses
+from prima_facie import prima_facie_filter_hypotheses
 
 if __name__ == '__main__':
 
@@ -8,8 +9,13 @@ if __name__ == '__main__':
         "deadline": lambda e: e["deadline_exceeded"]
     }
 
-    input = prepare_input(SYSTEM_STATES)
+    prepared_event_log = prepare_input(SYSTEM_STATES)
     # print(input)
     
-    hypotheses = generate_hypotheses(input, causes_key="resource", causes_values=["r1"], effects_key="deadline", effects_values=[True])
-    print(hypotheses)
+    hypotheses = generate_hypotheses(prepared_event_log, causes_key="resource", effects_key="deadline", effects_values=[True])
+    # print(hypotheses)
+    print(len(hypotheses))
+
+    prima_facie_hypotheses = prima_facie_filter_hypotheses(prepared_event_log, hypotheses)
+    print(prima_facie_hypotheses)
+    print(len(prima_facie_hypotheses))

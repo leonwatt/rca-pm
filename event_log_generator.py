@@ -5,12 +5,12 @@ import os
 import datetime
 
 ACTIVITY_NAMES = ["A", "B", "C", "D"]
-RESOURCE_NAMES = ["r1", "r2", "r3", "r4"]
+RESOURCE_NAMES = ["r1", "r2", "r3", "r4", "r5", "r6"]
 AVERAGE_CASE_LENGTH = 4
 CASE_LENGTH_VARIATION = 2
 NUMBER_OF_CASES = 100
 DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .1 # => 34% chance to exceed deadline for case of length 4
-RESOURCE_DEADLINE_INFLUENCE_VARIATION = .2
+RESOURCE_DEADLINE_INFLUENCE_VARIATION = .3
 INITIAL_TIMESTAMP = datetime.datetime(2022, 1, 2, 12, 48, 36) # Start at an arbitrary point in time
 AVERAGE_TIMESTAMP_INCREASE_IN_HOURS = 5
 TIMESTAMP_INCREASE_VARIATION = 4.9

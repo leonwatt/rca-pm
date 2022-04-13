@@ -1,28 +1,43 @@
 import utils
 
-def test_prima_facie(event_log, cause, effect):
-    p_e = count_events_of_state(event_log, effect) / len(event_log) # P(e)
-    p_e_given_c = count_effect_after_cause(event_log, cause, effect) / count_events_of_state(event_log, cause) # P(e|c)
-    
-    return p_e_given_c > p_e
+def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
+    cases = utils.group_by_as_list(prepared_event_log, "case")
+
+    def event_matching(event, cause_or_effect):
+        return event["state"][cause_or_effect[0]] == cause_or_effect[1]
+
+    def p_e(hypothesis):
+        effect = hypothesis["effect"]
+        return len([e for e in prepared_event_log if event_matching(e, effect)]) / len(prepared_event_log)
+
+    def p_e_c(hypothesis):
+        cause = hypothesis["cause"]
+        effect = hypothesis["effect"]
+
+        def is_case_containing_cause(case):
+            return any([event_matching(ev, cause) for ev in case])
+        
+        def is_cause_followed_by_effect_in_case(case):
+            cause_present = False
+            for ev in case:
+                if cause_present and event_matching(ev, effect): return True
+                if event_matching(ev, cause): cause_present = True
+            return False
+
+        num_cases_with_c = len([c for c in cases if is_case_containing_cause(c)])
+        num_cases_with_e_and_c = len([c for c in cases if is_cause_followed_by_effect_in_case(c)])
+
+        # print(num_cases_with_e_and_c)
+        # print(num_cases_with_c)
+        # print()
+
+        if num_cases_with_c == 0: return 0
+        return num_cases_with_e_and_c / num_cases_with_c
 
 
-def count_effect_after_cause(event_log, cause, effect):
-    def cause_index(c):
-        matches = [index for (index, obj) in enumerate(c) if obj["state"] == cause]
-        if len(matches) == 0: return -1
-        return matches[0]
+    for h in hypotheses:
+        print(p_e_c(h))
+        print(p_e(h))
+        print()
 
-    case_objects = list(utils.group_by(event_log, "case").values())
-
-    cases = [{
-        "events": c,
-        "events_after_cause": c[cause_index(c) + 1:]
-    } for c in case_objects]
-    return sum([len([e for e in case["events_after_cause"] if e["state"] == effect]) for case in cases])
-
-def count_events_of_state(event_log, state):
-    return count_matching_events(event_log, lambda e: e["state"] == state)
-
-def count_matching_events(event_log, check_fn):
-    return len([e for e in event_log if check_fn(e)])
+    return [h for h in hypotheses if p_e_c(h) > p_e(h)]
