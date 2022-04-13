@@ -1,23 +1,29 @@
 import utils
+from utils import DATE_FORMAT
 import random
 import os
+import datetime
 
 ACTIVITY_NAMES = ["A", "B", "C", "D"]
-RESOURCE_NAMES = ["r1", "r2", "r3"]
+RESOURCE_NAMES = ["r1", "r2", "r3", "r4"]
 AVERAGE_CASE_LENGTH = 4
-MAX_CASE_LENGTH_DEVIATION = 2
+CASE_LENGTH_VARIATION = 2
 NUMBER_OF_CASES = 100
-TIMESTAMP_INCREASE_PROBABILITY = .5
-DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .1 # Approx. 34% chance to exceed deadline for case of length 4
+DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .1 # => 34% chance to exceed deadline for case of length 4
+RESOURCE_DEADLINE_INFLUENCE_VARIATION = .2
+INITIAL_TIMESTAMP = datetime.datetime(2022, 1, 2, 12, 48, 36) # Start at an arbitrary point in time
+AVERAGE_TIMESTAMP_INCREASE_IN_HOURS = 5
+TIMESTAMP_INCREASE_VARIATION = 4.9
 
 event_log = []
-timestamp = 0
-max_started_case_index = 0
+timestamp = INITIAL_TIMESTAMP
+
+resource_influences_on_deadlines = {r: 1 + RESOURCE_DEADLINE_INFLUENCE_VARIATION * (2 * random.random() - 1) for r in RESOURCE_NAMES}
 
 cases = []
 for case_index in range(0, NUMBER_OF_CASES):
-    # Determine a random case length in the range AVERAGE_CASE_LENGTH ± MAX_CASE_LENGTH_DEVIATION
-    case_length = round(AVERAGE_CASE_LENGTH + 2 * MAX_CASE_LENGTH_DEVIATION * (random.random() - .5))
+    # Determine a random case length in the range AVERAGE_CASE_LENGTH ± CASE_LENGTH_VARIATION
+    case_length = round(AVERAGE_CASE_LENGTH + CASE_LENGTH_VARIATION * (2 * random.random() - 1))
     case_id = f"c{case_index}"
 
     # Create an object for each case that contains the case name and the list of events belonging to this case.
@@ -31,8 +37,9 @@ for case_index in range(0, NUMBER_OF_CASES):
         } for _ in range(0, case_length)]
     })
 
+max_case_index = 0
 while(True):
-    non_empty_cases = [c for c in cases if len(c["events"]) > 0]
+    non_empty_cases = [c for (index, c) in enumerate(cases) if index <= max_case_index and len(c["events"]) > 0]
 
     # Terminate when all events have been added
     if len(non_empty_cases) == 0: break
@@ -42,16 +49,21 @@ while(True):
     case = random.choice(non_empty_cases)
     event = case["events"][0]
 
-    case["deadline_exceeded"] = case["deadline_exceeded"] or random.random() < DEADLINE_EXCEED_PROBABILITY_PER_EVENT
+    # Extend range of allowed cases (if applicable)
+    if cases.index(case) == max_case_index: max_case_index += 1
+
+    # Determine if the deadline is exceeded
+    deadline_exceed_probability = DEADLINE_EXCEED_PROBABILITY_PER_EVENT * resource_influences_on_deadlines[event["resource"]]
+    case["deadline_exceeded"] = case["deadline_exceeded"] or random.random() < deadline_exceed_probability
     event["deadline_exceeded"] = case["deadline_exceeded"]
 
     event["case"] = case["id"]
-    event["timestamp"] = timestamp
+    event["timestamp"] = timestamp.strftime(DATE_FORMAT)
     event_log.append(event)
     
     case["events"] = case["events"][1:]
 
-    if (random.random() < TIMESTAMP_INCREASE_PROBABILITY): timestamp += 1
+    timestamp += datetime.timedelta(hours = AVERAGE_TIMESTAMP_INCREASE_IN_HOURS + TIMESTAMP_INCREASE_VARIATION * (2 * random.random() - 1))
 
 path = os.path.join("event-logs", "log.csv")
 utils.write_csv(path, event_log)

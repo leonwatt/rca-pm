@@ -1,5 +1,6 @@
 import csv
 
+DATE_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 def read_from_file(path):
     with open(path) as f:
