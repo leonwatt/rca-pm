@@ -10,7 +10,7 @@ AVERAGE_CASE_LENGTH = 4
 CASE_LENGTH_VARIATION = 2
 NUMBER_OF_CASES = 100
 DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .1 # => 34% chance to exceed deadline for case of length 4
-RESOURCE_DEADLINE_INFLUENCE_VARIATION = .3
+RESOURCE_DEADLINE_INFLUENCE_VARIATION = 1
 INITIAL_TIMESTAMP = datetime.datetime(2022, 1, 2, 12, 48, 36) # Start at an arbitrary point in time
 AVERAGE_TIMESTAMP_INCREASE_IN_HOURS = 5
 TIMESTAMP_INCREASE_VARIATION = 4.9
@@ -19,6 +19,7 @@ event_log = []
 timestamp = INITIAL_TIMESTAMP
 
 resource_influences_on_deadlines = {r: 1 + RESOURCE_DEADLINE_INFLUENCE_VARIATION * (2 * random.random() - 1) for r in RESOURCE_NAMES}
+print(resource_influences_on_deadlines)
 
 cases = []
 for case_index in range(0, NUMBER_OF_CASES):
