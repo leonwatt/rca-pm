@@ -1,10 +1,8 @@
 import utils
+from utils import event_matching
 
 def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
     cases = utils.group_by_as_list(prepared_event_log, "case")
-
-    def event_matching(event, cause_or_effect):
-        return event["state"][cause_or_effect[0]] == cause_or_effect[1]
 
     def _p_e(hypothesis):
         effect = hypothesis["effect"]
@@ -63,9 +61,9 @@ def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
         return num_cases_with_e_and_c / num_cases_with_c
 
 
-    for h in hypotheses:
-        print(p_e_c(h))
-        print(p_e(h))
-        print()
+    # for h in hypotheses:
+    #     print(p_e_c(h))
+    #     print(p_e(h))
+    #     print()
 
     return [h for h in hypotheses if p_e_c(h) > p_e(h)]

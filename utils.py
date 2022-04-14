@@ -34,3 +34,16 @@ def group_by(arr_of_dicts, grouping_attr):
 
 def group_by_as_list(arr_of_dicts, grouping_attr):
     return list(group_by(arr_of_dicts, grouping_attr).values())
+
+
+def event_matching(event, cause_or_effect):
+    return event["state"][cause_or_effect[0]] == cause_or_effect[1]
+
+
+def get_all_values_for_state_attribute(event_log, attribute):
+    system_states = [e["state"] for e in event_log]
+    return list(set([s[attribute] for s in system_states]))
+
+def divide_or_zero(numerator, denominator):
+    if denominator == 0: return 0
+    return numerator / denominator

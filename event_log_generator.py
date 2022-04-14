@@ -5,7 +5,7 @@ import os
 import datetime
 
 ACTIVITY_NAMES = ["A", "B", "C", "D"]
-RESOURCE_NAMES = ["r1", "r2", "r3", "r4", "r5", "r6"]
+RESOURCE_NAMES = ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"]
 AVERAGE_CASE_LENGTH = 4
 CASE_LENGTH_VARIATION = 2
 NUMBER_OF_CASES = 100
