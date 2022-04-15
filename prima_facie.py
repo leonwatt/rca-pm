@@ -30,6 +30,7 @@ def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
         interesting_cause_events = sum([number_of_interesting_cause_events(c) for c in cases])
         interesting_cause_events_with_effect = sum([number_of_interesting_cause_events(c) for c in cases if any_event_matching(c, effect)])
 
+        print(utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events))
         return utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events)
 
 

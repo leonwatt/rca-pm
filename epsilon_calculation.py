@@ -1,79 +1,34 @@
 import statistics
 import utils
-from utils import event_matching
-from utils import get_all_values_for_state_attribute
+from event_log_utils import any_event_matching, interesting_events, event_matching
 
 def calculate_epsion_values(prepared_event_log, prima_facie_hypotheses):
 
     cases = utils.group_by_as_list(prepared_event_log, "case")
 
-    def p_e_c_x(hypothesis, x_val):
+    def p_e_c_x(hypothesis, x_val, c_val = True):
         cause = hypothesis["cause"]
         effect = hypothesis["effect"]
-        x_obj = (cause[0], x_val)
+        x = (cause[0], x_val)
 
-        def number_of_c_and_x_preceding_e(case):
-            num = 0
-            x_matching = False
-            c_matching = False
-            for ev in case:
-                if event_matching(ev, effect):
-                    if x_matching and c_matching: return num
-                    return 0
-                if event_matching(ev, cause):
-                    c_matching = True
-                    num += 1
-                if event_matching(ev, x_obj):
-                    x_matching = True
-                    num += 1
-            return 0
+        interesting_parts_of_cases = [interesting_events(c, effect) for c in cases]
 
-        def number_of_c_and_x(case):
-            num = 0
-            x_matching = False
-            c_matching = False
-            for ev in case:
-                if event_matching(ev, cause):
-                    c_matching = True
-                    num += 1
-                if event_matching(ev, x_obj):
-                    x_matching = True
-                    num += 1
-            if x_matching and c_matching: return num
-            return 0
+        def num_c_or_x(case):
+            return len([ev for ev in case if event_matching(ev, cause) or event_matching(ev, x)])
 
+        num_c_and_x = sum([num_c_or_x(c) for c in interesting_parts_of_cases if any_event_matching(c, cause) == c_val and any_event_matching(c, x)])
+        num_c_and_x_and_effect = sum([num_c_or_x(c) for (index, c) in enumerate(interesting_parts_of_cases) if any_event_matching(c, cause) == c_val and any_event_matching(c, x) and any_event_matching(cases[index], effect)])
 
-        return utils.divide_or_zero(sum([number_of_c_and_x_preceding_e(c) for c in cases]), sum([number_of_c_and_x(c) for c in cases]))
+        return utils.divide_or_zero(num_c_and_x_and_effect, num_c_and_x)
 
-
-
-    def p_e_notc_x(hypothesis, x_val):
-        cause = hypothesis["cause"]
-        effect = hypothesis["effect"]
-        x_obj = (cause[0], x_val)
-
-        def number_of_notc_and_x_preceding_e(case):
-            num = 0
-            for ev in case:
-                if event_matching(ev, effect): return num
-                if event_matching(ev, cause): return 0
-                if event_matching(ev, x_obj): num += 1
-            return 0
-
-        def number_of_notc_and_x(case):
-            num = 0
-            for ev in case:
-                if event_matching(ev, cause): return 0
-                if event_matching(ev, x_obj): num += 1
-            return num
-
-        return utils.divide_or_zero(sum([number_of_notc_and_x_preceding_e(c) for c in cases]), sum([number_of_notc_and_x(c) for c in cases]))
 
     def calculate_epsilon_for_hypothesis(hypothesis):
         cause = hypothesis["cause"]
-        x_vals = get_all_values_for_state_attribute(prepared_event_log, cause[0])
-        epsilons = [p_e_c_x(hypothesis, x) - p_e_notc_x(hypothesis, x) for x in x_vals if x != cause[1]]
+        x_vals = list(set([h["cause"][1] for h in prima_facie_hypotheses]))
+        epsilons = [p_e_c_x(hypothesis, x) - p_e_c_x(hypothesis, x, False) for x in x_vals if x != cause[1]]
+        # print(epsilons)
         if len(epsilons) == 0: return 0
         return statistics.mean(epsilons)
+
 
     return [calculate_epsilon_for_hypothesis(h) for h in prima_facie_hypotheses]

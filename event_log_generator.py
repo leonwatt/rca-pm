@@ -6,10 +6,10 @@ import datetime
 
 ACTIVITY_NAMES = ["A", "B", "C", "D"]
 RESOURCE_NAMES = ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"]
-AVERAGE_CASE_LENGTH = 4
+AVERAGE_CASE_LENGTH = 10
 CASE_LENGTH_VARIATION = 2
 NUMBER_OF_CASES = 100
-DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .1 # => 34% chance to exceed deadline for case of length 4
+DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .2
 RESOURCE_DEADLINE_INFLUENCE_VARIATION = 1
 INITIAL_TIMESTAMP = datetime.datetime(2022, 1, 2, 12, 48, 36) # Start at an arbitrary point in time
 AVERAGE_TIMESTAMP_INCREASE_IN_HOURS = 5
@@ -18,8 +18,11 @@ TIMESTAMP_INCREASE_VARIATION = 4.9
 event_log = []
 timestamp = INITIAL_TIMESTAMP
 
-resource_influences_on_deadlines = {r: 1 + RESOURCE_DEADLINE_INFLUENCE_VARIATION * (2 * random.random() - 1) for r in RESOURCE_NAMES}
+resource_influences_on_deadlines = {r: 0.1 for r in RESOURCE_NAMES}#1 + RESOURCE_DEADLINE_INFLUENCE_VARIATION * (2 * random.random() - 1) for r in RESOURCE_NAMES}
+resource_influences_on_deadlines["r1"] = .5
+resource_influences_on_deadlines["r2"] = 1
 print(resource_influences_on_deadlines)
+utils.write_to_file(os.path.join("event-logs", "resource-influences.txt"), resource_influences_on_deadlines)
 
 cases = []
 for case_index in range(0, NUMBER_OF_CASES):
@@ -38,6 +41,10 @@ for case_index in range(0, NUMBER_OF_CASES):
         } for _ in range(0, case_length)]
     })
 
+case_deadlines = {}
+for c in cases:
+    case_deadlines[c["id"]] = 0
+
 max_case_index = 0
 while(True):
     non_empty_cases = [c for (index, c) in enumerate(cases) if index <= max_case_index and len(c["events"]) > 0]
@@ -54,9 +61,9 @@ while(True):
     if cases.index(case) == max_case_index: max_case_index += 1
 
     # Determine if the deadline is exceeded
-    deadline_exceed_probability = DEADLINE_EXCEED_PROBABILITY_PER_EVENT * resource_influences_on_deadlines[event["resource"]]
-    case["deadline_exceeded"] = case["deadline_exceeded"] or random.random() < deadline_exceed_probability
+    case["deadline_exceeded"] = case_deadlines[case["id"]] >= 1
     event["deadline_exceeded"] = case["deadline_exceeded"]
+    case_deadlines[case["id"]] += random.random() * resource_influences_on_deadlines[event["resource"]]
 
     event["case"] = case["id"]
     event["timestamp"] = timestamp.strftime(DATE_FORMAT)
