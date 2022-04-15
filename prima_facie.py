@@ -10,7 +10,7 @@ def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
         effect = hypothesis["effect"]
 
         def number_of_interesting_events(case):
-            return len(event_log_utils.interesting_events(c, effect))
+            return len(event_log_utils.interesting_events(case, effect))
 
 
         interesting_events_with_effect = sum([number_of_interesting_events(c) for c in cases if any_event_matching(c, effect)])
