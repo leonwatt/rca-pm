@@ -1,38 +1,22 @@
 from input_data_preparation import prepare_input
 from hypotheses_generation import generate_hypotheses
-from prima_facie import prima_facie_filter_hypotheses, prima_face_new
-from epsilon_calculation import calculate_epsion_values, calculate_epsion_values_new
+import prima_facie
+import epsilon_calculation
+from event_log_utils import print_hypotheses, print_hypotheses_with_epsilon
 
-from event_log_utils import print_hypotheses
-
-if __name__ == '__main__':
-
-    # Configuration
-    # SYSTEM_STATES = {
-    #     "resource": lambda e: e["resource"],
-    #     "deadline": lambda e: e["deadline_exceeded"]
-    # }
-    SYSTEM_STATES = {
-        "activity": lambda e: e["activity"]
-    }
-
+def run(event_log_path, system_states, causes_key, effects_key, causes_values = None, effects_values = None):
     # Step 1: Input data preparation
-    # prepared_event_log = prepare_input(SYSTEM_STATES)
-    prepared_event_log = prepare_input(SYSTEM_STATES, "event-logs/original-paper.csv")
+    prepared_event_log = prepare_input(system_states, event_log_path)
     
     # Step 2: Generating hypotheses
-    # hypotheses = generate_hypotheses(prepared_event_log, causes_key="resource", effects_key="deadline", effects_values=[True])
-    hypotheses = generate_hypotheses(prepared_event_log, causes_key="activity", effects_key="activity", effects_values=["Case Delayed"])
+    hypotheses = generate_hypotheses(prepared_event_log, causes_key=causes_key, causes_values=causes_values, effects_key=effects_key, effects_values=effects_values)
     print_hypotheses(hypotheses)
-    # print(len(hypotheses))
 
     # Step 3: Testing for prima facie causes
-    # prima_facie_hypotheses = prima_facie_filter_hypotheses(prepared_event_log, hypotheses)
-    prima_facie_hypotheses = prima_face_new(prepared_event_log, hypotheses)
+    prima_facie_hypotheses = prima_facie.prima_facie_new2(prepared_event_log, hypotheses)
     print_hypotheses(prima_facie_hypotheses)
-    print(len(prima_facie_hypotheses))
+    print(f"{len(hypotheses)} ~> {len(prima_facie_hypotheses)} hypotheses")
 
     # Step 4: Calculation of epsilon values
-    epsilon_values = calculate_epsion_values_new(prepared_event_log, prima_facie_hypotheses)
-    print(epsilon_values)
-
+    epsilon_values = epsilon_calculation.calculate_epsion_values_new2(prepared_event_log, prima_facie_hypotheses)
+    print_hypotheses_with_epsilon(prima_facie_hypotheses, epsilon_values)

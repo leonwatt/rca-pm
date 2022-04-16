@@ -30,9 +30,18 @@ def print_hypothesis(hypothesis):
     print(f"{hypothesis['cause'][0]}: {hypothesis['cause'][1]} => {hypothesis['effect'][0]}: {hypothesis['effect'][1]}")
 
 def print_hypotheses(hypotheses):
+    print()
     print(f"{len(hypotheses)} hypotheses:")
     for h in hypotheses:
         print_hypothesis(h)
+    print()
+
+def print_hypotheses_with_epsilon(hypotheses, epsilons):
+    print()
+    pf_hypotheses_with_epsilon = [(h, epsilons[index]) for (index, h) in enumerate(hypotheses)]
+    for (h, eps) in [h for h in sorted(pf_hypotheses_with_epsilon, key=lambda h: h[1], reverse=True)]:
+        print(f"{eps}: {h['cause'][0]}: {h['cause'][1]} => {h['effect'][0]}: {h['effect'][1]}")
+    print()
 
 def case_until_match(case, cause_or_effect, excluding = False):
     res = []
@@ -49,4 +58,12 @@ def events_matching(case, cause_or_effect, preceed_effect = None):
         else: return []
     
     return [ev for ev in case if event_matching(ev, cause_or_effect)]
+
+def events_not_matching(case, cause_or_effect, preceed_effect = None):
+    if preceed_effect != None:
+        if any_event_matching(case, preceed_effect):
+             case = case_until_match(case, preceed_effect, excluding=True)
+        else: return []
+    
+    return [ev for ev in case if not event_matching(ev, cause_or_effect)]
 

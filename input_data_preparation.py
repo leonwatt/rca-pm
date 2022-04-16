@@ -1,10 +1,8 @@
 import utils
-import os
 import statistics
-import datetime
 
 
-def prepare_input(system_states, path_to_event_log = os.path.join("event-logs", "log.csv"), print_stats = False):
+def prepare_input(system_states, path_to_event_log, print_stats = False):
     event_log = utils.read_csv(path_to_event_log)
 
     # def parse_timestamp(event):

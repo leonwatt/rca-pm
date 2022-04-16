@@ -7,5 +7,4 @@
 # print(len([c for c in cases if any([ev for ev in c if ev["activity"] == "Case Delayed"])]))
 # print(len([ev for ev in eventlog if ev["activity"] == "Case Delayed"]))
 
-obj = {"a": "b"}
-print([x for x in obj])
+print(2**3)

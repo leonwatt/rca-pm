@@ -30,7 +30,6 @@ def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
         interesting_cause_events = sum([number_of_interesting_cause_events(c) for c in cases])
         interesting_cause_events_with_effect = sum([number_of_interesting_cause_events(c) for c in cases if any_event_matching(c, effect)])
 
-        # print(utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events))
         return utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events)
 
 
@@ -47,6 +46,34 @@ def prima_face_new(prepared_event_log, hypotheses):
         c_true = len([ev for ev in prepared_event_log if event_matching(ev, cause)])
         e_true = len([ev for ev in prepared_event_log if event_matching(ev, effect)])
         total_events = len(prepared_event_log)
-        return c_and_e/c_true > e_true/total_events
+        return utils.divide_or_zero(c_and_e, c_true) > utils.divide_or_zero(e_true, total_events)
+
+    return [h for h in hypotheses if is_prima_facie_hypothesis(h)]
+
+def prima_facie_new2(prepared_event_log, hypotheses):
+    cases = utils.group_by_as_list(prepared_event_log, "case")
+
+    def is_prima_facie_hypothesis(hypothesis):
+        cause = hypothesis["cause"]
+        effect = hypothesis["effect"]
+        
+        num_c = 0
+        num_c_before_e = 0
+        num_events_before_e = 0
+        for case in cases:
+            num_c += len(event_log_utils.events_matching(case, cause))
+            num_c_before_e += len(event_log_utils.events_matching(case, cause, effect))
+            num_events_before_e += len(event_log_utils.case_until_match(case, effect, excluding=True))
+
+        num_events = len(prepared_event_log)
+
+        # print()
+        # print(num_c_before_e)
+        # print(num_c)
+        # print(num_events_before_e/num_events)
+        # print()
+
+        if num_c == 0: return False
+        return num_c_before_e/num_c > num_events_before_e/num_events
 
     return [h for h in hypotheses if is_prima_facie_hypothesis(h)]

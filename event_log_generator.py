@@ -6,7 +6,7 @@ import datetime
 
 ACTIVITY_NAMES = ["A", "B", "C", "D"]
 RESOURCE_NAMES = ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"]
-AVERAGE_CASE_LENGTH = 6
+AVERAGE_CASE_LENGTH = 5
 CASE_LENGTH_VARIATION = 2
 NUMBER_OF_CASES = 100
 DEADLINE_EXCEED_PROBABILITY_PER_EVENT = .2
@@ -18,9 +18,8 @@ TIMESTAMP_INCREASE_VARIATION = 4.9
 event_log = []
 timestamp = INITIAL_TIMESTAMP
 
-resource_influences_on_deadlines = {r: .2 for r in RESOURCE_NAMES}#1 + RESOURCE_DEADLINE_INFLUENCE_VARIATION * (2 * random.random() - 1) for r in RESOURCE_NAMES}
-resource_influences_on_deadlines["r1"] = .5
-resource_influences_on_deadlines["r2"] = .4
+resource_influences_on_deadlines = {r: .05 for r in RESOURCE_NAMES}
+resource_influences_on_deadlines["r1"] = 1
 print(resource_influences_on_deadlines)
 utils.write_to_file(os.path.join("event-logs", "resource-influences.txt"), resource_influences_on_deadlines)
 
