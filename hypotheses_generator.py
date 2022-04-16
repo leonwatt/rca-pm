@@ -1,4 +1,3 @@
-
 def generate(input, causes_key, effects_key, causes_values = None, effects_values = None):
     system_states = [e["state"] for e in input]
 
@@ -11,13 +10,4 @@ def generate(input, causes_key, effects_key, causes_values = None, effects_value
     causes = [(causes_key, v) for v in causes_values]
     effects = [(effects_key, v) for v in effects_values]
 
-    rules = []
-
-    for c in causes:
-        for e in effects:
-            rules.append({
-                "cause": c,
-                "effect": e
-            })
-
-    return rules
+    return [{"cause": c, "effect": e} for c in causes for e in effects]
