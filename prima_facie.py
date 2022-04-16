@@ -30,8 +30,23 @@ def prima_facie_filter_hypotheses(prepared_event_log, hypotheses):
         interesting_cause_events = sum([number_of_interesting_cause_events(c) for c in cases])
         interesting_cause_events_with_effect = sum([number_of_interesting_cause_events(c) for c in cases if any_event_matching(c, effect)])
 
-        print(utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events))
+        # print(utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events))
         return utils.divide_or_zero(interesting_cause_events_with_effect, interesting_cause_events)
 
 
     return [h for h in hypotheses if p_e_c(h) > p_e(h)]
+
+
+def prima_face_new(prepared_event_log, hypotheses):
+    cases = utils.group_by_as_list(prepared_event_log, "case")
+
+    def is_prima_facie_hypothesis(hypothesis):
+        cause = hypothesis["cause"]
+        effect = hypothesis["effect"]
+        c_and_e = len(utils.flatten([[ev for ev in event_log_utils.interesting_events(c, effect) if event_matching(ev, cause)] for c in cases]))
+        c_true = len([ev for ev in prepared_event_log if event_matching(ev, cause)])
+        e_true = len([ev for ev in prepared_event_log if event_matching(ev, effect)])
+        total_events = len(prepared_event_log)
+        return c_and_e/c_true > e_true/total_events
+
+    return [h for h in hypotheses if is_prima_facie_hypothesis(h)]

@@ -33,3 +33,20 @@ def print_hypotheses(hypotheses):
     print(f"{len(hypotheses)} hypotheses:")
     for h in hypotheses:
         print_hypothesis(h)
+
+def case_until_match(case, cause_or_effect, excluding = False):
+    res = []
+    for ev in case:
+        if excluding: res.append(ev)
+        if event_matching(ev, cause_or_effect): return res
+        if not excluding: res.append(ev)
+    return []
+
+def events_matching(case, cause_or_effect, preceed_effect = None):
+    if preceed_effect != None:
+        if any_event_matching(case, preceed_effect):
+             case = case_until_match(case, preceed_effect, excluding=True)
+        else: return []
+    
+    return [ev for ev in case if event_matching(ev, cause_or_effect)]
+
