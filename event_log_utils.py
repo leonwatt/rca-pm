@@ -51,10 +51,10 @@ def case_until_match(case, cause_or_effect, excluding = False):
         if not excluding: res.append(ev)
     return []
 
-def events_matching(case, cause_or_effect, preceed_effect = None):
-    if preceed_effect != None:
-        if any_event_matching(case, preceed_effect):
-             case = case_until_match(case, preceed_effect, excluding=True)
+def events_matching(case, cause_or_effect, before_effect = None):
+    if before_effect != None:
+        if any_event_matching(case, before_effect):
+             case = case_until_match(case, before_effect, excluding=True)
         else: return []
     
     return [ev for ev in case if event_matching(ev, cause_or_effect)]
