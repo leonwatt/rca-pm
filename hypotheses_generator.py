@@ -1,5 +1,5 @@
 
-def generate_hypotheses(input, causes_key, effects_key, causes_values = None, effects_values = None):
+def generate(input, causes_key, effects_key, causes_values = None, effects_values = None):
     system_states = [e["state"] for e in input]
 
     def generate_values(key):
