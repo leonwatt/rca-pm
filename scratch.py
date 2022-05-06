@@ -7,4 +7,5 @@
 # print(len([c for c in cases if any([ev for ev in c if ev["activity"] == "Case Delayed"])]))
 # print(len([ev for ev in eventlog if ev["activity"] == "Case Delayed"]))
 
-print(2**3)
+# print(2**3)
+print(list(enumerate([1])))

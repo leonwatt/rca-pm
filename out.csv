@@ -1,0 +1,3 @@
+cause_key,cause_value,effect_key,effect_value,epsilon,z
+resource,r7,deadline,True,0.05471380471380469,-0.7071067811865474
+resource,r1,deadline,True,0.2166052308232403,0.7071067811865477

@@ -36,9 +36,10 @@ def print_hypotheses(hypotheses):
         print_hypothesis(h)
     print()
 
-def print_hypotheses_with_epsilon(hypotheses, epsilons):
+def print_hypotheses_with_value(hypotheses, value, description = None):
     print()
-    pf_hypotheses_with_epsilon = [(h, epsilons[index]) for (index, h) in enumerate(hypotheses)]
+    if(description): print(f"{description}:")
+    pf_hypotheses_with_epsilon = [(h, value[index]) for (index, h) in enumerate(hypotheses)]
     for (h, eps) in [h for h in sorted(pf_hypotheses_with_epsilon, key=lambda h: h[1], reverse=True)]:
         print(f"{eps}: {h['cause'][0]}: {h['cause'][1]} => {h['effect'][0]}: {h['effect'][1]}")
     print()
