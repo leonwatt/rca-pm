@@ -1,0 +1,110 @@
+cause_key,cause_value,effect_key,effect_value,epsilon,z
+activity,T03 Adjust confirmation of receipt - Resource09,activity,Case Delayed,-0.024082502568125632,-0.7191109387797479
+activity,T07-5 Draft intern advice aspect 5 - Resource25,activity,Case Delayed,0.024611575003849757,0.2237220971362905
+activity,Confirmation of receipt - admin1,activity,Case Delayed,0.012875524054385842,-0.0035157333779611884
+activity,T08 Draft and send request for advice - Resource09,activity,Case Delayed,0.02697338740417848,0.2694523967271313
+activity,T04 Determine confirmation of receipt - Resource01,activity,Case Delayed,-0.008964090597026644,-0.4263825626056351
+activity,T02 Check confirmation of receipt - admin1,activity,Case Delayed,0.012875524054385842,-0.0035157333779611884
+activity,Confirmation of receipt - Resource01,activity,Case Delayed,-0.007264869207787786,-0.39348159926483706
+activity,T02 Check confirmation of receipt - Resource24,activity,Case Delayed,0.05604944842248299,0.8324340209677219
+activity,T02 Check confirmation of receipt - Resource08,activity,Case Delayed,0.01687338029347438,0.07389226207044321
+activity,T06 Determine necessity of stop advice - Resource29,activity,Case Delayed,-0.01215846870405979,-0.48823331240300133
+activity,T20 Print report Y to stop indication - Resource11,activity,Case Delayed,0.013719282157669826,0.012821428218787885
+activity,T10 Determine necessity to stop indication - Resource21,activity,Case Delayed,-0.005759617049681432,-0.36433634109768437
+activity,T10 Determine necessity to stop indication - Resource11,activity,Case Delayed,-0.029434182262578358,-0.822732172924966
+activity,T16 Report reasons to hold request - Resource11,activity,Case Delayed,0.013719282157669826,0.012821428218787885
+activity,T06 Determine necessity of stop advice - Resource09,activity,Case Delayed,0.0022027992493963877,-0.21016504333790348
+activity,T02 Check confirmation of receipt - Resource19,activity,Case Delayed,-0.023165350830908996,-0.7013527020513187
+activity,T04 Determine confirmation of receipt - admin3,activity,Case Delayed,0.008617324168613941,-0.0859646003865899
+activity,T05 Print and send confirmation of receipt - Resource07,activity,Case Delayed,-0.026715376952440414,-0.770089642407101
+activity,T02 Check confirmation of receipt - Resource12,activity,Case Delayed,0.004404825204555117,-0.16752858896828443
+activity,T02 Check confirmation of receipt - Resource07,activity,Case Delayed,0.0008962095398011754,-0.23546372449216552
+activity,T06 Determine necessity of stop advice - Resource07,activity,Case Delayed,0.01721911987431949,0.08058660181150731
+activity,T04 Determine confirmation of receipt - Resource07,activity,Case Delayed,-0.009533261572508028,-0.4374030650060595
+activity,T02 Check confirmation of receipt - Resource15,activity,Case Delayed,0.015904635348833723,0.055135058264008864
+activity,T06 Determine necessity of stop advice - Resource37,activity,Case Delayed,0.02312368588009107,0.1949130285676065
+activity,T07-3 Draft intern advice hold for aspect 3 - Resource35,activity,Case Delayed,0.009780531012947574,-0.06344215217262936
+activity,T04 Determine confirmation of receipt - Resource29,activity,Case Delayed,0.008738962446559868,-0.08360939432051666
+activity,T02 Check confirmation of receipt - Resource21,activity,Case Delayed,-0.022974369472480088,-0.6976548491922161
+activity,T05 Print and send confirmation of receipt - Resource15,activity,Case Delayed,0.00851755379246514,-0.08789639191708597
+activity,Confirmation of receipt - Resource27,activity,Case Delayed,-0.008842341182958477,-0.4240252046801828
+activity,Confirmation of receipt - Resource29,activity,Case Delayed,0.008738962446559868,-0.08360939432051666
+activity,Confirmation of receipt - Resource33,activity,Case Delayed,0.014476539785836356,0.027483735097473545
+activity,Confirmation of receipt - Resource26,activity,Case Delayed,0.0016178350101702667,-0.22149134084824576
+activity,T07-1 Draft intern advice aspect 1 - Resource21,activity,Case Delayed,-0.010490585986764406,-0.45593914020977905
+activity,Confirmation of receipt - Resource07,activity,Case Delayed,-0.000678971704347841,-0.2659629759122961
+activity,T14 Determine document X request unlicensed - Resource10,activity,Case Delayed,-0.01991514588552913,-0.6384210120224382
+activity,T03 Adjust confirmation of receipt - Resource11,activity,Case Delayed,-0.006236420007979581,-0.37356837922473407
+activity,T06 Determine necessity of stop advice - Resource33,activity,Case Delayed,0.014476539785836356,0.027483735097473545
+activity,T03 Adjust confirmation of receipt - Resource02,activity,Case Delayed,0.01770691369964037,0.09003144923773872
+activity,T11 Create document X request unlicensed - Resource15,activity,Case Delayed,0.04288510920303166,0.5775411360217476
+activity,T04 Determine confirmation of receipt - Resource08,activity,Case Delayed,0.0059752115281430495,-0.1371221786026517
+activity,T10 Determine necessity to stop indication - Resource29,activity,Case Delayed,0.008738962446559868,-0.08360939432051666
+activity,Confirmation of receipt - Resource21,activity,Case Delayed,0.010206011628956544,-0.055203836531015495
+activity,T10 Determine necessity to stop indication - Resource09,activity,Case Delayed,-0.023930965638299235,-0.7161768237759174
+activity,Confirmation of receipt - Resource15,activity,Case Delayed,0.023355877922814607,0.19940881818869524
+activity,T03 Adjust confirmation of receipt - Resource01,activity,Case Delayed,0.033447402819054534,0.394804717020139
+activity,T04 Determine confirmation of receipt - Resource21,activity,Case Delayed,-0.007351972697212127,-0.39516812977260657
+activity,T12 Check document X request unlicensed - Resource24,activity,Case Delayed,0.021417903113282868,0.1618850213676378
+activity,T05 Print and send confirmation of receipt - Resource01,activity,Case Delayed,-0.016346265526718945,-0.569319008836435
+activity,T04 Determine confirmation of receipt - Resource24,activity,Case Delayed,0.0242321442013605,0.21637541529593265
+activity,T02 Check confirmation of receipt - Resource28,activity,Case Delayed,0.020810019275729716,0.1501149459781333
+activity,T04 Determine confirmation of receipt - Resource19,activity,Case Delayed,-0.04248122210693901,-1.07535386327311
+activity,T06 Determine necessity of stop advice - Resource21,activity,Case Delayed,-0.009558124156094864,-0.43788446369626466
+activity,T12 Check document X request unlicensed - Resource17,activity,Case Delayed,0.021499462595926885,0.16346420673192233
+activity,Confirmation of receipt - Resource02,activity,Case Delayed,0.01916072415040761,0.11818067372848483
+activity,T02 Check confirmation of receipt - Resource33,activity,Case Delayed,0.020649379292009197,0.14700457422261848
+activity,Confirmation of receipt - Resource43,activity,Case Delayed,0.02980541345138884,0.3242871497202009
+activity,Confirmation of receipt - Resource25,activity,Case Delayed,0.0030968241136782033,-0.19285459781751502
+activity,Confirmation of receipt - Resource11,activity,Case Delayed,0.016997442442292413,0.07629440003556798
+activity,T02 Check confirmation of receipt - Resource32,activity,Case Delayed,0.04453124791249327,0.6094142925608877
+activity,T07-1 Draft intern advice aspect 1 - Resource09,activity,Case Delayed,0.028974336202150713,0.30819551958670605
+activity,T06 Determine necessity of stop advice - Resource11,activity,Case Delayed,-0.028065465807100384,-0.7962305703611003
+activity,Confirmation of receipt - Resource10,activity,Case Delayed,0.00664200890486063,-0.12421139711999135
+activity,T02 Check confirmation of receipt - Resource26,activity,Case Delayed,-0.007742968812852599,-0.40273874355404204
+activity,T05 Print and send confirmation of receipt - Resource18,activity,Case Delayed,0.0018306636395616107,-0.2173704729155431
+activity,T11 Create document X request unlicensed - Resource02,activity,Case Delayed,0.01575607067596589,0.0522584932167953
+activity,T02 Check confirmation of receipt - Resource18,activity,Case Delayed,0.011276156077279881,-0.034483297414322774
+activity,T11 Create document X request unlicensed - Resource08,activity,Case Delayed,0.018304908464452485,0.1016100486831503
+activity,T02 Check confirmation of receipt - Resource01,activity,Case Delayed,-0.017569034141505794,-0.5929947144414599
+activity,T07-5 Draft intern advice aspect 5 - Resource37,activity,Case Delayed,0.022436237912831728,0.1816024025875292
+activity,T03 Adjust confirmation of receipt - Resource26,activity,Case Delayed,0.000346220737885018,-0.2461128144367068
+activity,T11 Create document X request unlicensed - Resource06,activity,Case Delayed,0.0019857118363710425,-0.21436837144036744
+activity,Confirmation of receipt - Resource08,activity,Case Delayed,0.01723795193922808,0.08095123533196137
+activity,T06 Determine necessity of stop advice - Resource15,activity,Case Delayed,-0.009223420070370653,-0.43140379736039636
+activity,T14 Determine document X request unlicensed - Resource06,activity,Case Delayed,0.006890980713520662,-0.11939071136268391
+activity,Confirmation of receipt - Resource18,activity,Case Delayed,0.01977951904382626,0.1301620130835406
+activity,T07-2 Draft intern advice aspect 2 - Resource25,activity,Case Delayed,0.014896436073381838,0.03561392487201454
+activity,T06 Determine necessity of stop advice - Resource35,activity,Case Delayed,0.024132840131803092,0.2144526525689617
+activity,T05 Print and send confirmation of receipt - Resource21,activity,Case Delayed,-0.022699465607328363,-0.692332057208264
+activity,T12 Check document X request unlicensed - Resource15,activity,Case Delayed,0.03507406876865446,0.42630083466228136
+activity,T02 Check confirmation of receipt - Resource25,activity,Case Delayed,0.0031431881172306283,-0.19195688055072954
+activity,T19 Determine report Y to stop indication - Resource11,activity,Case Delayed,0.013719282157669826,0.012821428218787885
+activity,T06 Determine necessity of stop advice - Resource26,activity,Case Delayed,-0.029919621247524786,-0.8321314250465927
+activity,T07-4 Draft internal advice to hold for type 4 - Resource11,activity,Case Delayed,0.024439063477450933,0.22038186410847108
+activity,T04 Determine confirmation of receipt - Resource10,activity,Case Delayed,0.00633938299839278,-0.13007095368968263
+activity,T03 Adjust confirmation of receipt - Resource18,activity,Case Delayed,0.023613482403614987,0.20439665298933596
+activity,T04 Determine confirmation of receipt - admin1,activity,Case Delayed,0.004919298306596915,-0.1575671673564214
+activity,T12 Check document X request unlicensed - Resource13,activity,Case Delayed,0.01199170603220304,-0.02062855018448593
+activity,T03 Adjust confirmation of receipt - Resource08,activity,Case Delayed,0.01520022131631496,0.04149592895018539
+activity,T14 Determine document X request unlicensed - Resource15,activity,Case Delayed,0.04288510920303166,0.5775411360217476
+activity,T10 Determine necessity to stop indication - Resource37,activity,Case Delayed,0.022436237912831728,0.1816024025875292
+activity,T07-2 Draft intern advice aspect 2 - Resource09,activity,Case Delayed,0.031830219926479726,0.363492213893161
+activity,Case Delayed,activity,Case Delayed,0.5113797790811424,9.648711059279053
+activity,T04 Determine confirmation of receipt - Resource33,activity,Case Delayed,0.020649379292009197,0.14700457422261848
+activity,T10 Determine necessity to stop indication - Resource28,activity,Case Delayed,0.00736039894003298,-0.1103016591886748
+activity,Confirmation of receipt - Resource12,activity,Case Delayed,0.0066316116157650986,-0.12441271334019793
+activity,T11 Create document X request unlicensed - Resource13,activity,Case Delayed,0.01199170603220304,-0.02062855018448593
+activity,T12 Check document X request unlicensed - Resource06,activity,Case Delayed,0.0019857118363710425,-0.21436837144036744
+activity,T06 Determine necessity of stop advice - Resource25,activity,Case Delayed,-0.00889290568414739,-0.42500425356133376
+activity,T06 Determine necessity of stop advice - Resource28,activity,Case Delayed,0.00044435285128481474,-0.24421274356544265
+activity,Confirmation of receipt - Resource09,activity,Case Delayed,0.03207931689174938,0.3683153229797951
+activity,Confirmation of receipt - Resource37,activity,Case Delayed,0.022436237912831728,0.1816024025875292
+activity,T04 Determine confirmation of receipt - Resource15,activity,Case Delayed,0.025604082292254957,0.24293939637586837
+activity,T02 Check confirmation of receipt - Resource10,activity,Case Delayed,-0.020599057244199716,-0.6516631608574734
+activity,T02 Check confirmation of receipt - Resource29,activity,Case Delayed,0.008738962446559868,-0.08360939432051666
+activity,T09-1 Process or receive external advice from party 1 - Resource09,activity,Case Delayed,0.03575629289785573,0.4395103147260376
+activity,Confirmation of receipt - Resource28,activity,Case Delayed,0.00736039894003298,-0.1103016591886748
+activity,T07-5 Draft intern advice aspect 5 - Resource09,activity,Case Delayed,0.04462768877106956,0.6112816167204517
+activity,T03 Adjust confirmation of receipt - Resource13,activity,Case Delayed,0.0033867906458409512,-0.18724015681226244
+activity,T14 Determine document X request unlicensed - Resource17,activity,Case Delayed,0.03637690545087768,0.45152684828966033
